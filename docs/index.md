@@ -5,10 +5,6 @@
 
 </div>
 
-!!! warning "⚠️ v2.0 ahead! Beware of breaking changes."
-
-    See the [migration guide](advanced/v2_migration.md) for details.
-
 <div align="center">
 
 <a href="https://join.slack.com/t/swe-bench/shared_invite/zt-36pj9bu5s-o3_yXPZbaH2wVnxnss1EkQ">
