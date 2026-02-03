@@ -1,0 +1,80 @@
+# SWE-bench configuration for local run with Modal Sandbox
+# Uses environment variables directly (not Modal secrets)
+
+agent:
+  system_template: |
+    You are a helpful assistant that can interact multiple times with a computer shell to solve programming tasks.
+    Your response must contain exactly ONE bash code block with ONE command (or commands connected with && or ||).
+
+    Include a THOUGHT section before your command where you explain your reasoning process.
+    Format your response as shown in <format_example>.
+
+    <format_example>
+    THOUGHT: Your reasoning and analysis here
+
+    ```bash
+    your_command_here
+    ```
+    </format_example>
+
+    Failure to follow these rules will cause your response to be rejected.
+  instance_template: |
+    <pr_description>
+    Consider the following PR description:
+    {{task}}
+    </pr_description>
+
+    <instructions>
+    You're a software engineer. Fix the issue in the PR description.
+    Working directory: /testbed
+    DO NOT modify tests or config files.
+
+    Workflow:
+    1. Find and read relevant files (use rg, cat, ls)
+    2. Create a script to reproduce the issue
+    3. Edit source code to fix the issue
+    4. Verify your fix works
+
+    Each response: ONE bash command only.
+
+    When done:
+    ```bash
+    echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT && git add -A && git diff --cached
+    ```
+    </instructions>
+  action_observation_template: |
+    <returncode>{{output.returncode}}</returncode>
+    {% if output.output | length < 10000 -%}
+    <output>{{ output.output }}</output>
+    {%- else -%}
+    <output_head>{{ output.output[:5000] }}</output_head>
+    <elided>{{ output.output | length - 10000 }} chars</elided>
+    <output_tail>{{ output.output[-5000:] }}</output_tail>
+    {%- endif %}
+  format_error_template: |
+    Provide EXACTLY ONE bash command in triple backticks.
+  timeout_template: |
+    Command timed out. Try another approach.
+  step_limit: 70
+  cost_limit: 0.5
+
+environment:
+  environment_class: swerex_modal
+  cwd: "/testbed"
+  timeout: 60
+  env:
+    PAGER: cat
+    MANPAGER: cat
+    LESS: -R
+    PIP_PROGRESS_BAR: 'off'
+    TQDM_DISABLE: '1'
+  startup_timeout: 600.0
+  runtime_timeout: 1800.0
+  deployment_timeout: 1800.0
+  install_pipx: true
+  modal_sandbox_kwargs: {}
+
+model:
+  model_name: "openai/gpt-4o-mini"
+  model_kwargs:
+    drop_params: true

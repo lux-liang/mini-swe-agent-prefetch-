@@ -1,0 +1,15 @@
+{
+  "instance_id": "django__django-11149",
+  "run_id": "phase_a_prefetch_repair_20_40_b4_20260129_235316",
+  "subset": "verified",
+  "split": "test",
+  "config": "/app/src/minisweagent/config/extra/swebench_prefetch_v2_all.yaml",
+  "start_time": "2026-01-29T15:53:20.711622",
+  "status": "success",
+  "returncode": 0,
+  "stdout": "\ud83d\udc4b This is mini-swe-agent version 1.17.3.\nLoading global config from '/root/.config/mini-swe-agent/.env'\nminisweagent: INFO: Loading dataset from princeton-nlp/SWE-Bench_Verified, split\ntest...                                                                         \nminisweagent: INFO: Loading agent config from                                   \n'/app/src/minisweagent/config/extra/swebench_prefetch_v2_all.yaml'              \n\ud83e\udd96 INFO     Building image from docker registry                                 \n            docker.io/swebench/sweb.eval.x86_64.django_1776_django-11149:latest \n\ud83e\udd96 WARNING  DOCKER_USERNAME and DOCKER_PASSWORD not set. Using public images.   \n\ud83e\udd96 INFO     Starting modal sandbox                                              \n\ud83e\udd96 INFO     Sandbox (sb-D4fJkKnDjHxlE6ZA5FrcTV) created in 3.20s                \n\ud83e\udd96 INFO     Check sandbox logs at                                               \n            https://modal.com/apps/default/main/deployed/swe-rex?activeTab=logs&\n            taskId=ta-01KG57B90NDFWE0G3JPFY0E3J9                                \n\ud83e\udd96 INFO     Sandbox created with id sb-D4fJkKnDjHxlE6ZA5FrcTV                   \n\ud83e\udd96 INFO     Starting runtime at https://olfmsekdx3efij.r441.modal.host          \n\ud83e\udd96 INFO     Runtime started in 17.47s                                           \nminisweagent.prefetch: INFO: [PrefetchAgent] ENABLED                            \ninstance_id=django__django-11149                                                \n[PrefetchAgent] ENABLED instance_id=django__django-11149\nSaved trajectory to '/results/phase_a_prefetch_repair_20_40_b4_20260129_235316/django__django-11149/django__django-11149.traj.json'\n\ud83e\udd96 DEBUG    Ensuring deployment is stopped because object is deleted            \n",
+  "stderr": "Warning: Input is not a terminal (fd=0).\n/usr/local/lib/python3.12/site-packages/click/core.py:1223: UserWarning: The parameter -c is used more than once. Remove its duplicate as parameters should be unique.\n  parser = self.make_parser(ctx)\n/usr/local/lib/python3.12/site-packages/click/core.py:1216: UserWarning: The parameter -c is used more than once. Remove its duplicate as parameters should be unique.\n  self.parse_args(ctx, args)\nWarning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.\n\nGenerating test split:   0%|          | 0/500 [00:00<?, ? examples/s]\nGenerating test split: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 500/500 [00:00<00:00, 16777.89 examples/s]\n",
+  "attempts": 1,
+  "end_time": "2026-01-29T15:55:28.446862",
+  "duration_seconds": 127.73524
+}

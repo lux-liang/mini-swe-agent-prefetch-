@@ -1,0 +1,18 @@
+{
+  "tag": "prefetch_verified_20",
+  "n_instances": 20,
+  "total_steps": 291,
+  "total_cost": 0.8729662999999999,
+  "avg_steps": 14.55,
+  "std_steps": 4.828370107472795,
+  "avg_cost": 0.04364831499999999,
+  "avg_manual_paging_ops": 5.25,
+  "total_manual_paging_ops": 105,
+  "avg_read_duplication_rate": 0.535091575091575,
+  "avg_front_25_explore_ratio": 0.7658333333333333,
+  "avg_front_50_explore_ratio": 0.40748376623376625,
+  "avg_explore_chain_len": 2.15,
+  "avg_explore_ratio": 0.2453835788394612,
+  "avg_total_lines_paged": 1047.1,
+  "avg_overlap_ratio": 0.28094574256304716
+}

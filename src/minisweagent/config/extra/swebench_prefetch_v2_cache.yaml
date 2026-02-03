@@ -1,0 +1,177 @@
+# Prefetch V2 + ReadCache configuration
+# Enables file content caching to reduce duplicate reads
+#
+# Variant: prefetch_v2_cache
+# Changes from prefetch_v2:
+#   - read_cache.enabled: true
+#   - Caches file content to avoid re-reading same files
+
+agent:
+  system_template: |
+    You are a helpful assistant that can interact multiple times with a computer shell to solve programming tasks.
+    Your response must contain exactly ONE bash code block with ONE command (or commands connected with && or ||).
+
+    Include a THOUGHT section before your command where you explain your reasoning process.
+    Format your response as shown in <format_example>.
+
+    <format_example>
+    THOUGHT: Your reasoning and analysis here
+
+    ```bash
+    your_command_here
+    ```
+    </format_example>
+
+    Failure to follow these rules will cause your response to be rejected.
+  instance_template: |
+    <pr_description>
+    Consider the following PR description:
+    {{task}}
+    </pr_description>
+
+    <instructions>
+    # Task Instructions
+
+    ## Overview
+    You're a software engineer interacting continuously with a computer by submitting commands.
+    You'll be helping implement necessary changes to meet requirements in the PR description.
+    Your task is specifically to make changes to non-test files in the current directory in order to fix the issue described in the PR description in a way that is general and consistent with the codebase.
+
+    IMPORTANT: This is an interactive process where you will think and issue ONE command, see its result, then think and issue your next command.
+
+    For each response:
+    1. Include a THOUGHT section explaining your reasoning and what you're trying to accomplish
+    2. Provide exactly ONE bash command to execute
+
+    ## Important Boundaries
+    - MODIFY: Regular source code files in /testbed (this is the working directory for all your subsequent commands)
+    - DO NOT MODIFY: Tests, configuration files (pyproject.toml, setup.cfg, etc.)
+
+    ## Recommended Workflow
+    1. Analyze the codebase by finding and reading relevant files
+    2. Create a script to reproduce the issue
+    3. Edit the source code to resolve the issue
+    4. Verify your fix works by running your script again
+    5. Test edge cases to ensure your fix is robust
+
+    ## File Reading Best Practices
+    **IMPORTANT**: When reading files, prefer reading larger chunks at once rather than many small segments:
+    - Use `cat filename.py` for small files (<200 lines)
+    - Use `head -n 300 filename.py` or `tail -n 300 filename.py` for larger files
+    - When you need to see specific sections, read 100+ lines at a time: `sed -n '1,150p' file.py`
+    - AVOID repeatedly reading small 50-line windows of the same file - this is inefficient
+    - If you need to understand a file's structure, use `wc -l` first, then read in one or two large chunks
+
+    ## Command Execution Rules
+    You are operating in an environment where
+    1. You write a single command
+    2. The system executes that command in a subshell
+    3. You see the result
+    4. You write your next command
+
+    Each response should include:
+    1. A **THOUGHT** section where you explain your reasoning and plan
+    2. A single bash code block with your command
+
+    **CRITICAL REQUIREMENTS:**
+    - Your response SHOULD include a THOUGHT section explaining your reasoning
+    - Your response MUST include EXACTLY ONE bash code block
+    - This bash block MUST contain EXACTLY ONE command (or a set of commands connected with && or ||)
+    - If you include zero or multiple bash blocks, or no command at all, YOUR RESPONSE WILL FAIL
+    - Do NOT try to run multiple independent commands in separate blocks in one response
+    - Directory or environment variable changes are not persistent. Every action is executed in a new subshell.
+
+    ## Submission
+    When you've completed your work (reading, editing, testing), and cannot make further progress
+    issue exactly the following command:
+
+    ```bash
+    echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT && git add -A && git diff --cached
+    ```
+    </instructions>
+  action_observation_template: |
+    <returncode>{{output.returncode}}</returncode>
+    {% if output.output | length < 10000 -%}
+    <output>
+    {{ output.output -}}
+    </output>
+    {%- else -%}
+    <warning>
+    The output of your last command was too long.
+    Please try a different command that produces less output.
+    </warning>
+    {%- set elided_chars = output.output | length - 10000 -%}
+    <output_head>
+    {{ output.output[:5000] }}
+    </output_head>
+    <elided_chars>
+    {{ elided_chars }} characters elided
+    </elided_chars>
+    <output_tail>
+    {{ output.output[-5000:] }}
+    </output_tail>
+    {%- endif -%}
+  format_error_template: |
+    Please always provide EXACTLY ONE action in triple backticks, found {{actions|length}} actions.
+  timeout_template: |
+    The last command timed out and has been killed.
+    Please try another command and make sure to avoid those requiring interactive input.
+  step_limit: 70
+  cost_limit: 0.5
+
+environment:
+  environment_class: swerex_modal
+  cwd: "/testbed"
+  timeout: 60
+  env:
+    PAGER: cat
+    MANPAGER: cat
+    LESS: -R
+    PIP_PROGRESS_BAR: 'off'
+    TQDM_DISABLE: '1'
+  startup_timeout: 600.0
+  runtime_timeout: 1800.0
+  deployment_timeout: 1800.0
+  install_pipx: true
+  modal_sandbox_kwargs: {}
+  secret_names:
+    - mini-swe-secrets
+
+model:
+  model_name: "openai/gpt-5-mini"
+  model_kwargs:
+    drop_params: true
+
+# Prefetch V2 + Cache configuration
+prefetch:
+  enabled: true
+  version: "v2_cache"
+  enable_anchor_sink: true
+  enable_evidence: true
+  enable_scroll_consolidation: true
+  enable_one_hop: false
+  enable_gate: false
+  enable_jitter: false
+  budget:
+    max_files: 5
+    max_lines_per_file: 800
+    max_total_tokens: 6000
+  scroll_consolidation:
+    detect_pattern: "nl\\s+(?:-\\w+\\s+)*.*\\|\\s*sed\\s+-n"
+    lookahead_lines: 200
+    consolidate_threshold: 2
+    max_block_size: 1000
+    cache_ttl_steps: 10
+  jitter_probability: 0.0
+
+# ReadCache module - ENABLED
+read_cache:
+  enabled: true
+  max_cached_files: 50
+  max_cache_size_mb: 10
+  ttl_steps: 15
+  invalidate_on_write: true
+
+# PagerPolicy module - DISABLED
+pager_policy:
+  enabled: false

@@ -1,0 +1,254 @@
+{
+  "protocol": "Repo-Aware Stratified Sampling",
+  "seed": 42,
+  "dataset": "princeton-nlp/SWE-Bench_Verified",
+  "total_instances": 500,
+  "total_unique_repos": 12,
+  "slices": [
+    "0:20",
+    "20:40",
+    "310:330",
+    "280:300",
+    "420:440"
+  ],
+  "windows": [
+    {
+      "start": 0,
+      "end": 20,
+      "slice_str": "0:20",
+      "window_type": "sequential",
+      "repos": [
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy",
+        "astropy/astropy"
+      ],
+      "unique_repo_count": 1,
+      "repo_distribution": {
+        "astropy/astropy": 20
+      },
+      "boundary_index": null
+    },
+    {
+      "start": 20,
+      "end": 40,
+      "slice_str": "20:40",
+      "window_type": "sequential",
+      "repos": [
+        "astropy/astropy",
+        "astropy/astropy",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django",
+        "django/django"
+      ],
+      "unique_repo_count": 2,
+      "repo_distribution": {
+        "django/django": 18,
+        "astropy/astropy": 2
+      },
+      "boundary_index": null
+    },
+    {
+      "start": 310,
+      "end": 330,
+      "slice_str": "310:330",
+      "window_type": "boundary",
+      "repos": [
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pydata/xarray",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint",
+        "pylint-dev/pylint"
+      ],
+      "unique_repo_count": 2,
+      "repo_distribution": {
+        "pydata/xarray": 10,
+        "pylint-dev/pylint": 10
+      },
+      "boundary_index": 320
+    },
+    {
+      "start": 280,
+      "end": 300,
+      "slice_str": "280:300",
+      "window_type": "anchor",
+      "repos": [
+        "matplotlib/matplotlib",
+        "matplotlib/matplotlib",
+        "matplotlib/matplotlib",
+        "matplotlib/matplotlib",
+        "matplotlib/matplotlib",
+        "matplotlib/matplotlib",
+        "matplotlib/matplotlib",
+        "mwaskom/seaborn",
+        "mwaskom/seaborn",
+        "pallets/flask",
+        "psf/requests",
+        "psf/requests",
+        "psf/requests",
+        "psf/requests",
+        "psf/requests",
+        "psf/requests",
+        "psf/requests",
+        "psf/requests",
+        "pydata/xarray",
+        "pydata/xarray"
+      ],
+      "unique_repo_count": 5,
+      "repo_distribution": {
+        "psf/requests": 8,
+        "matplotlib/matplotlib": 7,
+        "mwaskom/seaborn": 2,
+        "pydata/xarray": 2,
+        "pallets/flask": 1
+      },
+      "boundary_index": null
+    },
+    {
+      "start": 420,
+      "end": 440,
+      "slice_str": "420:440",
+      "window_type": "anchor",
+      "repos": [
+        "sphinx-doc/sphinx",
+        "sphinx-doc/sphinx",
+        "sphinx-doc/sphinx",
+        "sphinx-doc/sphinx",
+        "sphinx-doc/sphinx",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy",
+        "sympy/sympy"
+      ],
+      "unique_repo_count": 2,
+      "repo_distribution": {
+        "sympy/sympy": 15,
+        "sphinx-doc/sphinx": 5
+      },
+      "boundary_index": null
+    }
+  ],
+  "combined_unique_repos": 10,
+  "combined_repos_list": [
+    "astropy/astropy",
+    "django/django",
+    "matplotlib/matplotlib",
+    "mwaskom/seaborn",
+    "pallets/flask",
+    "psf/requests",
+    "pydata/xarray",
+    "pylint-dev/pylint",
+    "sphinx-doc/sphinx",
+    "sympy/sympy"
+  ],
+  "boundaries_found": 11,
+  "boundary_details": [
+    {
+      "index": 22,
+      "from_repo": "astropy/astropy",
+      "to_repo": "django/django"
+    },
+    {
+      "index": 253,
+      "from_repo": "django/django",
+      "to_repo": "matplotlib/matplotlib"
+    },
+    {
+      "index": 287,
+      "from_repo": "matplotlib/matplotlib",
+      "to_repo": "mwaskom/seaborn"
+    },
+    {
+      "index": 289,
+      "from_repo": "mwaskom/seaborn",
+      "to_repo": "pallets/flask"
+    },
+    {
+      "index": 290,
+      "from_repo": "pallets/flask",
+      "to_repo": "psf/requests"
+    },
+    {
+      "index": 298,
+      "from_repo": "psf/requests",
+      "to_repo": "pydata/xarray"
+    },
+    {
+      "index": 320,
+      "from_repo": "pydata/xarray",
+      "to_repo": "pylint-dev/pylint"
+    },
+    {
+      "index": 330,
+      "from_repo": "pylint-dev/pylint",
+      "to_repo": "pytest-dev/pytest"
+    },
+    {
+      "index": 349,
+      "from_repo": "pytest-dev/pytest",
+      "to_repo": "scikit-learn/scikit-learn"
+    },
+    {
+      "index": 381,
+      "from_repo": "scikit-learn/scikit-learn",
+      "to_repo": "sphinx-doc/sphinx"
+    }
+  ]
+}

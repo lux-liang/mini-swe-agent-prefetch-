@@ -1,0 +1,15 @@
+{
+  "instance_id": "astropy__astropy-14539",
+  "run_id": "phase_a_prefetch_v2_all_verified_0_20_20260129_171416",
+  "subset": "verified",
+  "split": "test",
+  "config": "/app/src/minisweagent/config/extra/swebench_prefetch_v2_all.yaml",
+  "start_time": "2026-01-29T09:14:30.148691",
+  "status": "success",
+  "returncode": 0,
+  "stdout": "\ud83d\udc4b This is mini-swe-agent version 1.17.3.\nLoading global config from '/root/.config/mini-swe-agent/.env'\nminisweagent: INFO: Loading dataset from princeton-nlp/SWE-Bench_Verified, split\ntest...                                                                         \nminisweagent: INFO: Loading agent config from                                   \n'/app/src/minisweagent/config/extra/swebench_prefetch_v2_all.yaml'              \n\ud83e\udd96 INFO     Building image from docker registry                                 \n            docker.io/swebench/sweb.eval.x86_64.astropy_1776_astropy-14539:lates\n            t                                                                   \n\ud83e\udd96 WARNING  DOCKER_USERNAME and DOCKER_PASSWORD not set. Using public images.   \n\ud83e\udd96 INFO     Starting modal sandbox                                              \n\ud83e\udd96 INFO     Sandbox (sb-n0fhqojYtpPIY93WlN5LRT) created in 2.35s                \n\ud83e\udd96 INFO     Check sandbox logs at                                               \n            https://modal.com/apps/default/main/deployed/swe-rex?activeTab=logs&\n            taskId=ta-01KG4GH1N26BM6HN7J4TF6QP30                                \n\ud83e\udd96 INFO     Sandbox created with id sb-n0fhqojYtpPIY93WlN5LRT                   \n\ud83e\udd96 INFO     Starting runtime at https://nx4ruj7xwgz2w4.r437.modal.host          \n\ud83e\udd96 INFO     Runtime started in 13.13s                                           \nminisweagent.prefetch: INFO: [PrefetchAgent] ENABLED                            \ninstance_id=astropy__astropy-14539                                              \n[PrefetchAgent] ENABLED instance_id=astropy__astropy-14539\nSaved trajectory to '/results/phase_a_prefetch_v2_all_verified_0_20_20260129_171416/astropy__astropy-14539/astropy__astropy-14539.traj.json'\n\ud83e\udd96 DEBUG    Ensuring deployment is stopped because object is deleted            \n",
+  "stderr": "Warning: Input is not a terminal (fd=0).\n/usr/local/lib/python3.12/site-packages/click/core.py:1223: UserWarning: The parameter -c is used more than once. Remove its duplicate as parameters should be unique.\n  parser = self.make_parser(ctx)\n/usr/local/lib/python3.12/site-packages/click/core.py:1216: UserWarning: The parameter -c is used more than once. Remove its duplicate as parameters should be unique.\n  self.parse_args(ctx, args)\n\nGenerating test split:   0%|          | 0/500 [00:00<?, ? examples/s]\nGenerating test split: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 500/500 [00:00<00:00, 7211.61 examples/s]\n",
+  "attempts": 1,
+  "end_time": "2026-01-29T09:21:16.302971",
+  "duration_seconds": 406.15428
+}

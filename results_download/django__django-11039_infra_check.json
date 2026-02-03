@@ -1,0 +1,11 @@
+{
+  "instance_id": "django__django-11039",
+  "split": "test",
+  "status": "infrastructure_verified",
+  "timestamp": "2026-01-27T05:24:10.764464",
+  "python_version": "Python 3.12.10",
+  "mini_extra_available": true,
+  "api_key_configured": true,
+  "litellm_base_configured": true,
+  "note": "Use swerex_modal environment locally for actual evaluation"
+}
